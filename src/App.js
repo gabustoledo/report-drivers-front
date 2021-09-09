@@ -8,7 +8,7 @@ function App() {
     <Router>
       <div className="container">
         <Route path="/" exact component={SignIn} />
-        <Route path="/dashboard" exact component={Dashboard} />
+        <Route path="/dashboard/:type" exact component={Dashboard} />
       </div>
     </Router>
   );

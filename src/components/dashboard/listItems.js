@@ -2,69 +2,61 @@ import React from "react";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import DashboardIcon from "@material-ui/icons/Dashboard";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import PeopleIcon from "@material-ui/icons/People";
-import BarChartIcon from "@material-ui/icons/BarChart";
-import LayersIcon from "@material-ui/icons/Layers";
-import AssignmentIcon from "@material-ui/icons/Assignment";
+import LocalAtmIcon from '@material-ui/icons/LocalAtm';
+import LocalGasStationIcon from '@material-ui/icons/LocalGasStation';
+import FastfoodIcon from '@material-ui/icons/Fastfood';
+import AddIcon from '@material-ui/icons/Add';
+import HomeIcon from '@material-ui/icons/Home';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+
+function ListItemLink(props) {
+  return <ListItem button component="a" {...props} />;
+}
 
 export const mainListItems = (
   <div>
-    <ListItem button>
+    <ListItemLink button href={'http://localhost:3000/dashboard/home'}>
       <ListItemIcon>
-        <DashboardIcon />
+        <HomeIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItem>
-    <ListItem button>
+      <ListItemText primary="Inicio" />
+    </ListItemLink>
+    <ListItemLink button href={'http://localhost:3000/dashboard/combustible'}>
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <LocalGasStationIcon />
       </ListItemIcon>
-      <ListItemText primary="Orders" />
-    </ListItem>
-    <ListItem button>
+      <ListItemText primary="Combustible" />
+    </ListItemLink>
+    <ListItemLink button href={'http://localhost:3000/dashboard/peaje'}>
       <ListItemIcon>
-        <PeopleIcon />
+        <LocalAtmIcon />
       </ListItemIcon>
-      <ListItemText primary="Customers" />
-    </ListItem>
-    <ListItem button>
+      <ListItemText primary="Peaje" />
+    </ListItemLink>
+    <ListItemLink button href={'http://localhost:3000/dashboard/viatico'}>
       <ListItemIcon>
-        <BarChartIcon />
+        <FastfoodIcon />
       </ListItemIcon>
-      <ListItemText primary="Reports" />
-    </ListItem>
-    <ListItem button>
+      <ListItemText primary="Viatico" />
+    </ListItemLink>
+    <ListItemLink button href={'http://localhost:3000/dashboard/extra'}>
       <ListItemIcon>
-        <LayersIcon />
+        <AddIcon />
       </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItem>
+      <ListItemText primary="Extra" />
+    </ListItemLink>
   </div>
 );
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Saved reports</ListSubheader>
-    <ListItem button>
+    <ListSubheader inset>Adicional</ListSubheader>
+    <ListItemLink button href={'http://localhost:3000/dashboard/add'}>
       <ListItemIcon>
-        <AssignmentIcon />
+        <PersonAddIcon />
       </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
-    </ListItem>
+      <ListItemText primary="Agregar nuevo usuario" />
+    </ListItemLink>
   </div>
 );

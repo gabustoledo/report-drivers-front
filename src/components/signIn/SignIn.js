@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+// import FormControlLabel from "@material-ui/core/FormControlLabel";
+// import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -12,12 +12,18 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import axios from "axios";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="https://github.com/gabustoledo">
         Gabriel Bustamante
       </Link>{" "}
       {new Date().getFullYear()}
@@ -49,6 +55,65 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
 
+  const [name, setName] = useState("");
+  const [pass, setPass] = useState("");
+  //const [token, setToken] = useState("");
+  const [open, setOpen] = useState(false);
+  const [alertText, setAlertText] = useState("");
+
+  useEffect(() => {
+    const tokenAux = localStorage.getItem('token');
+
+    axios
+      .get("http://localhost:8080/api/auth/me", {
+        headers: {
+          authorization: tokenAux,
+        }
+      })
+      .then((response) => {
+        const status = response.status;
+        if (status === 200)
+          window.location.href = "http://localhost:3000/dashboard/home";
+      })
+      .catch((err) => {//console.log(err)
+      });
+  }, []);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8080/api/auth/login", {
+        name: name,
+        password: pass,
+      })
+      .then((response) => {
+        //setToken(response.data.token);
+        if (response.data.token === "") {
+          console.log("intentelo de nuevo");
+          setAlertText("Intentelo de nuevo, ocurrio un error");
+          handleClickOpen();
+        } else {
+          console.log(response.data.token);
+          localStorage.setItem("token", response.data.token);
+          window.location.href = "http://localhost:3000/dashboard/home";
+        }
+      })
+      .catch((err) => {
+        //console.log(err);
+        setAlertText("Nombre se usuario y/o constrasena incorrecta.");
+        handleClickOpen();
+      });
+    //handleClose();
+  };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -57,19 +122,20 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Iniciar Sesión
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
+            id="userName"
+            label="Usuario"
+            name="userName"
             autoComplete="email"
             autoFocus
+            onChange={(e) => setName(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -77,15 +143,16 @@ export default function SignIn() {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Contraseña"
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={(e) => setPass(e.target.value)}
           />
-          <FormControlLabel
+          {/* <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
-          />
+          /> */}
           <Button
             type="submit"
             fullWidth
@@ -93,25 +160,46 @@ export default function SignIn() {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            INICIAR SESIÓN
           </Button>
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
-                Forgot password?
+                ¿Olvidaste tu contraseña?
               </Link>
             </Grid>
-            <Grid item>
+            {/* <Grid item>
               <Link href="#" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
-            </Grid>
+            </Grid> */}
           </Grid>
         </form>
       </div>
       <Box mt={8}>
         <Copyright />
       </Box>
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Atención"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {alertText}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary" autoFocus>
+            Aceptar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }
