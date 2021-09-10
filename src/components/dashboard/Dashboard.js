@@ -27,6 +27,10 @@ import Fuel from "./forms/Fuel";
 import Toll from "./forms/Toll";
 import Extra from "./forms/Extra";
 import Viatic from "./forms/Viatic";
+import FuelRev from "./revision/Fuel";
+import TollRev from "./revision/Toll";
+import ExtraRev from "./revision/Extra";
+import ViaticRev from "./revision/Viatic";
 
 function Copyright() {
   return (
@@ -79,6 +83,14 @@ function Main(props) {
     return <Extra />;
   } else if (props.type === "home") {
     return <h1>Home</h1>;
+  } else if (props.type === "combustibleRev") {
+    return <FuelRev />;
+  } else if (props.type === "peajeRev") {
+    return <TollRev />;
+  } else if (props.type === "viaticoRev") {
+    return <ViaticRev />;
+  } else if (props.type === "extraRev") {
+    return <ExtraRev />;
   } else {
     return <h1>No encontrado</h1>;
   }
