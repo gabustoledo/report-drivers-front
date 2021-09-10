@@ -11,8 +11,6 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import Container from "@material-ui/core/Container";
-// import Grid from "@material-ui/core/Grid";
-// import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -25,6 +23,10 @@ import { useParams } from "react-router-dom";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+import Fuel from "./forms/Fuel";
+import Toll from "./forms/Toll";
+import Extra from "./forms/Extra";
+import Viatic from "./forms/Viatic";
 
 function Copyright() {
   return (
@@ -37,6 +39,49 @@ function Copyright() {
       {"."}
     </Typography>
   );
+}
+
+function BarLeft(props) {
+  if (props.rol === 3) {
+    return (
+      <div>
+        <Divider />
+        <List>{mainListItems}</List>
+      </div>
+    );
+  } else if (props.rol === 2) {
+    return (
+      <div>
+        <Divider />
+        <List>{secondaryListItems}</List>
+      </div>
+    );
+  } else if (props.rol === 1) {
+    return (
+      <div>
+        <Divider />
+        <List>{mainListItems}</List>
+        <Divider />
+        <List>{secondaryListItems}</List>
+      </div>
+    );
+  }
+}
+
+function Main(props) {
+  if (props.type === "combustible") {
+    return <Fuel />;
+  } else if (props.type === "peaje") {
+    return <Toll />;
+  } else if (props.type === "viatico") {
+    return <Viatic />;
+  } else if (props.type === "extra") {
+    return <Extra />;
+  } else if (props.type === "home") {
+    return <h1>Home</h1>;
+  } else {
+    return <h1>No encontrado</h1>;
+  }
 }
 
 const drawerWidth = 240;
@@ -125,9 +170,9 @@ export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [rol, setRol] = React.useState(3);
 
   const { type } = useParams();
-  console.log(type);
 
   useEffect(() => {
     const tokenAux = localStorage.getItem("token");
@@ -140,11 +185,15 @@ export default function Dashboard() {
       })
       .then((response) => {
         const status = response.status;
-        console.log(status);
         if (status === 200) setAuth(true);
         else {
           setAuth(false);
           window.location.href = "http://localhost:3000";
+        }
+        if (response.data.role === "dev") {
+          setRol(1);
+        } else if (response.data.role === "admin") {
+          setRol(2);
         }
       })
       .catch((err) => {
@@ -169,8 +218,8 @@ export default function Dashboard() {
   };
   const handleCloseSesion = () => {
     setAnchorEl(null);
-    localStorage.removeItem('token');
-    window.location.href = "http://localhost:3000"
+    localStorage.removeItem("token");
+    window.location.href = "http://localhost:3000";
   };
   //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
@@ -235,14 +284,12 @@ export default function Dashboard() {
             <ChevronLeftIcon />
           </IconButton>
         </div>
-        <Divider />
-        <List>{mainListItems}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
+        <BarLeft rol={rol} />
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
+          <Main type={type} />
           {/* <Grid container spacing={3}> */}
           {/* Chart */}
           {/* <Grid item xs={12} md={8} lg={9}>

@@ -3,8 +3,6 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-// import FormControlLabel from "@material-ui/core/FormControlLabel";
-// import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -57,7 +55,6 @@ export default function SignIn() {
 
   const [name, setName] = useState("");
   const [pass, setPass] = useState("");
-  //const [token, setToken] = useState("");
   const [open, setOpen] = useState(false);
   const [alertText, setAlertText] = useState("");
 
@@ -95,7 +92,6 @@ export default function SignIn() {
         password: pass,
       })
       .then((response) => {
-        //setToken(response.data.token);
         if (response.data.token === "") {
           console.log("intentelo de nuevo");
           setAlertText("Intentelo de nuevo, ocurrio un error");
@@ -149,10 +145,6 @@ export default function SignIn() {
             autoComplete="current-password"
             onChange={(e) => setPass(e.target.value)}
           />
-          {/* <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          /> */}
           <Button
             type="submit"
             fullWidth
@@ -168,11 +160,6 @@ export default function SignIn() {
                 ¿Olvidaste tu contraseña?
               </Link>
             </Grid>
-            {/* <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid> */}
           </Grid>
         </form>
       </div>
@@ -195,7 +182,7 @@ export default function SignIn() {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary" autoFocus>
+          <Button onClick={handleClose} color="secundary" autoFocus>
             Aceptar
           </Button>
         </DialogActions>
