@@ -7,7 +7,6 @@ import LocalGasStationIcon from "@material-ui/icons/LocalGasStation";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
 import AddIcon from "@material-ui/icons/Add";
 import HomeIcon from "@material-ui/icons/Home";
-import ListSubheader from "@material-ui/core/ListSubheader";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
 function ListItemLink(props) {
@@ -16,31 +15,31 @@ function ListItemLink(props) {
 
 export const mainListItems = (
   <div>
-    <ListItemLink button href={"http://localhost:3000/dashboard/home"}>
+    <ListItemLink button href={"/dashboard/home"}>
       <ListItemIcon>
         <HomeIcon />
       </ListItemIcon>
       <ListItemText primary="Inicio" />
     </ListItemLink>
-    <ListItemLink button href={"http://localhost:3000/dashboard/combustible"}>
+    <ListItemLink button href={"/dashboard/combustible"}>
       <ListItemIcon>
         <LocalGasStationIcon />
       </ListItemIcon>
       <ListItemText primary="Combustible" />
     </ListItemLink>
-    <ListItemLink button href={"http://localhost:3000/dashboard/peaje"}>
+    <ListItemLink button href={"/dashboard/peaje"}>
       <ListItemIcon>
         <LocalAtmIcon />
       </ListItemIcon>
       <ListItemText primary="Peaje" />
     </ListItemLink>
-    <ListItemLink button href={"http://localhost:3000/dashboard/viatico"}>
+    <ListItemLink button href={"/dashboard/viatico"}>
       <ListItemIcon>
         <FastfoodIcon />
       </ListItemIcon>
       <ListItemText primary="Viatico" />
     </ListItemLink>
-    <ListItemLink button href={"http://localhost:3000/dashboard/extra"}>
+    <ListItemLink button href={"/dashboard/extra"}>
       <ListItemIcon>
         <AddIcon />
       </ListItemIcon>
@@ -51,38 +50,37 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Revisión</ListSubheader>
-    <ListItemLink button href={"http://localhost:3000/dashboard/home"}>
+    <ListItemLink button href={"/dashboard/home"}>
       <ListItemIcon>
         <HomeIcon />
       </ListItemIcon>
       <ListItemText primary="Inicio" />
     </ListItemLink>
-    <ListItemLink button href={"http://localhost:3000/dashboard/combustibleRev"}>
+    <ListItemLink button href={"/dashboard/combustibleRev"}>
       <ListItemIcon>
         <LocalGasStationIcon />
       </ListItemIcon>
       <ListItemText primary="Combustible" />
     </ListItemLink>
-    <ListItemLink button href={"http://localhost:3000/dashboard/peajeRev"}>
+    <ListItemLink button href={"/dashboard/peajeRev"}>
       <ListItemIcon>
         <LocalAtmIcon />
       </ListItemIcon>
       <ListItemText primary="Peaje" />
     </ListItemLink>
-    <ListItemLink button href={"http://localhost:3000/dashboard/viaticoRev"}>
+    <ListItemLink button href={"/dashboard/viaticoRev"}>
       <ListItemIcon>
         <FastfoodIcon />
       </ListItemIcon>
       <ListItemText primary="Viatico" />
     </ListItemLink>
-    <ListItemLink button href={"http://localhost:3000/dashboard/extraRev"}>
+    <ListItemLink button href={"/dashboard/extraRev"}>
       <ListItemIcon>
         <AddIcon />
       </ListItemIcon>
       <ListItemText primary="Extra" />
     </ListItemLink>
-    <ListItemLink button href={"http://localhost:3000/dashboard/add"}>
+    <ListItemLink button href={"/dashboard/add"}>
       <ListItemIcon>
         <PersonAddIcon />
       </ListItemIcon>

@@ -200,7 +200,7 @@ export default function Dashboard() {
         if (status === 200) setAuth(true);
         else {
           setAuth(false);
-          window.location.href = "http://localhost:3000";
+          window.location.href = "/";
         }
         if (response.data.role === "dev") {
           setRol(1);
@@ -211,7 +211,7 @@ export default function Dashboard() {
       .catch((err) => {
         //console.log(err);
         setAuth(false);
-        window.location.href = "http://localhost:3000";
+        window.location.href = "/";
       });
   }, []);
 
@@ -231,7 +231,7 @@ export default function Dashboard() {
   const handleCloseSesion = () => {
     setAnchorEl(null);
     localStorage.removeItem("token");
-    window.location.href = "http://localhost:3000";
+    window.location.href = "/";
   };
   //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 

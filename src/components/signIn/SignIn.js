@@ -70,7 +70,7 @@ export default function SignIn() {
       .then((response) => {
         const status = response.status;
         if (status === 200)
-          window.location.href = "http://localhost:3000/dashboard/home";
+          window.location.href = "/dashboard/home";
       })
       .catch((err) => {//console.log(err)
       });
@@ -99,7 +99,7 @@ export default function SignIn() {
         } else {
           console.log(response.data.token);
           localStorage.setItem("token", response.data.token);
-          window.location.href = "http://localhost:3000/dashboard/home";
+          window.location.href = "/dashboard/home";
         }
       })
       .catch((err) => {
