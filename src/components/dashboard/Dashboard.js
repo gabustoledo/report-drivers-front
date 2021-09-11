@@ -31,6 +31,7 @@ import FuelRev from "./revision/Fuel";
 import TollRev from "./revision/Toll";
 import ExtraRev from "./revision/Extra";
 import ViaticRev from "./revision/Viatic";
+import CreateUser from "./CreateUser";
 
 function Copyright() {
   return (
@@ -91,6 +92,8 @@ function Main(props) {
     return <ViaticRev />;
   } else if (props.type === "extraRev") {
     return <ExtraRev />;
+  } else if (props.type === "add") {
+    return <CreateUser />;
   } else {
     return <h1>No encontrado</h1>;
   }
