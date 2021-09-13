@@ -14,7 +14,7 @@ import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import { mainListItems, secondaryListItems } from "./listItems";
+import { listForm, listRev } from "./listItems";
 // import Chart from "./Chart";
 // import Deposits from "./Deposits";
 // import Orders from "./Orders";
@@ -32,7 +32,6 @@ import TollRev from "./revision/Toll";
 import ExtraRev from "./revision/Extra";
 import ViaticRev from "./revision/Viatic";
 import CreateUser from "./CreateUser";
-import { ControlPointDuplicateOutlined } from "@material-ui/icons";
 
 function Copyright() {
   return (
@@ -52,23 +51,23 @@ function BarLeft(props) {
     return (
       <div>
         <Divider />
-        <List>{mainListItems}</List>
+        <List>{listForm}</List>
       </div>
     );
   } else if (props.rol === 2) {
     return (
       <div>
         <Divider />
-        <List>{secondaryListItems}</List>
+        <List>{listRev}</List>
       </div>
     );
   } else if (props.rol === 1) {
     return (
       <div>
         <Divider />
-        <List>{mainListItems}</List>
+        <List>{listForm}</List>
         <Divider />
-        <List>{secondaryListItems}</List>
+        <List>{listRev}</List>
       </div>
     );
   }
@@ -76,25 +75,25 @@ function BarLeft(props) {
 
 function Main(props) {
   if (props.type === "combustible") {
-    return <Fuel />;
+    return <Fuel host={props.host}/>;
   } else if (props.type === "peaje") {
-    return <Toll />;
+    return <Toll host={props.host}/>;
   } else if (props.type === "viatico") {
-    return <Viatic />;
+    return <Viatic host={props.host}/>;
   } else if (props.type === "extra") {
-    return <Extra />;
+    return <Extra host={props.host}/>;
   } else if (props.type === "home") {
     return <h1>Home</h1>;
   } else if (props.type === "combustibleRev") {
-    return <FuelRev />;
+    return <FuelRev host={props.host}/>;
   } else if (props.type === "peajeRev") {
-    return <TollRev />;
+    return <TollRev host={props.host}/>;
   } else if (props.type === "viaticoRev") {
-    return <ViaticRev />;
+    return <ViaticRev host={props.host}/>;
   } else if (props.type === "extraRev") {
-    return <ExtraRev />;
+    return <ExtraRev host={props.host}/>;
   } else if (props.type === "add") {
-    return <CreateUser />;
+    return <CreateUser host={props.host}/>;
   } else {
     return <h1>No encontrado</h1>;
   }
@@ -181,7 +180,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [auth, setAuth] = React.useState(true);
@@ -189,12 +188,13 @@ export default function Dashboard() {
   const [rol, setRol] = React.useState(3);
 
   const { type } = useParams();
+  const host = props.host;
 
   useEffect(() => {
     const tokenAux = localStorage.getItem("token");
 
     axios
-      .get("http://128.199.5.111:8080/api/auth/me", {
+      .get(host + ":8080/api/auth/me", {
         headers: {
           authorization: tokenAux,
         },
@@ -308,7 +308,7 @@ export default function Dashboard() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Main type={type} />
+          <Main type={type} host={host}/>
           {/* <Grid container spacing={3}> */}
           {/* Chart */}
           {/* <Grid item xs={12} md={8} lg={9}>

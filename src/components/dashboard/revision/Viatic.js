@@ -57,7 +57,7 @@ class Viatic extends Component {
   getViatics = () => {
     const tokenAux = localStorage.getItem("token");
     axios
-      .get("http://128.199.5.111:8080/api/viatic/mydrivers", {
+      .get(this.props.host + ":8080/api/viatic/mydrivers", {
         headers: {
           authorization: tokenAux,
         },

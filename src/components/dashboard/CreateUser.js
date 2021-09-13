@@ -9,11 +9,13 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
 
-export default function Title(props) {
+export default function CreateUser(props) {
   const [name, setName] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const [alertText, setAlertText] = React.useState("");
+
+  const host = props.host;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -27,7 +29,7 @@ export default function Title(props) {
     const token = localStorage.getItem("token");
     axios
       .post(
-        "http://128.199.5.111:8080/api/auth/register",
+        host + ":8080/api/auth/register",
         {
           name: name,
           password: password,

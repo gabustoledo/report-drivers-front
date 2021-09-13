@@ -3,12 +3,18 @@ import Dashboard from "./components/dashboard/Dashboard";
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
+const host = 'http://localhost'
+
 function App() {
   return (
     <Router>
       <div className="container">
-        <Route path="/" exact component={SignIn} />
-        <Route path="/dashboard/:type" exact component={Dashboard} />
+        <Route path="/" exact>
+          <SignIn host={host}/>
+        </Route>
+        <Route path="/dashboard/:type" exact>
+          <Dashboard host={host}/>
+        </Route>
       </div>
     </Router>
   );

@@ -58,7 +58,7 @@ class Extra extends Component {
   getExtras = () => {
     const tokenAux = localStorage.getItem("token");
     axios
-      .get("http://128.199.5.111:8080/api/extra/mydrivers", {
+      .get(this.props.host + ":8080/api/extra/mydrivers", {
         headers: {
           authorization: tokenAux,
         },

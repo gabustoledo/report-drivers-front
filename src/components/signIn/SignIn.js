@@ -50,8 +50,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
   const classes = useStyles();
+  const host = props.host;
 
   const [name, setName] = useState("");
   const [pass, setPass] = useState("");
@@ -60,9 +61,8 @@ export default function SignIn() {
 
   useEffect(() => {
     const tokenAux = localStorage.getItem('token');
-
     axios
-      .get("http://128.199.5.111:8080/api/auth/me", {
+      .get(host + ":8080/api/auth/me", {
         headers: {
           authorization: tokenAux,
         }
@@ -87,7 +87,7 @@ export default function SignIn() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://128.199.5.111:8080/api/auth/login", {
+      .post(host + ":8080/api/auth/login", {
         name: name,
         password: pass,
       })

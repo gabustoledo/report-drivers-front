@@ -13,7 +13,7 @@ function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
 }
 
-export const mainListItems = (
+export const listForm = (
   <div>
     <ListItemLink button href={"/dashboard/home"}>
       <ListItemIcon>
@@ -48,7 +48,7 @@ export const mainListItems = (
   </div>
 );
 
-export const secondaryListItems = (
+export const listRev = (
   <div>
     <ListItemLink button href={"/dashboard/home"}>
       <ListItemIcon>

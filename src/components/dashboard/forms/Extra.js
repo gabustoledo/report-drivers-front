@@ -9,12 +9,14 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-export default function Fuel() {
+export default function Extra(props) {
   const [amount, setAmount] = useState("");
   const [comment, setComment] = useState("");
   const [date, setDate] = useState("");
   const [open, setOpen] = useState(false);
   const [alertText, setAlertText] = useState("");
+
+  const host = props.host;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -28,7 +30,7 @@ export default function Fuel() {
     const token = localStorage.getItem("token");
     axios
       .post(
-        "http://128.199.5.111:8080/api/extra",
+        host + ":8080/api/extra",
         {
           amount: amount,
           date: date,
