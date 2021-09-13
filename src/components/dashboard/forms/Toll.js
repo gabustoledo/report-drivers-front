@@ -90,7 +90,7 @@ export default function Toll(props) {
             id="date"
             label="Fecha"
             type="date"
-            defaultValue="2021-09-01"
+            defaultValue=""
             variant="outlined"
             margin="normal"
             fullWidth

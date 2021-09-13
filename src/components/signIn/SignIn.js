@@ -154,13 +154,13 @@ export default function SignIn(props) {
           >
             INICIAR SESIÓN
           </Button>
-          <Grid container>
+          {/* <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
                 ¿Olvidaste tu contraseña?
               </Link>
             </Grid>
-          </Grid>
+          </Grid> */}
         </form>
       </div>
       <Box mt={8}>
