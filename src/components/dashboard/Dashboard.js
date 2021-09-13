@@ -27,6 +27,7 @@ import Fuel from "./forms/Fuel";
 import Toll from "./forms/Toll";
 import Extra from "./forms/Extra";
 import Viatic from "./forms/Viatic";
+import History from "./forms/History";
 import FuelRev from "./revision/Fuel";
 import TollRev from "./revision/Toll";
 import ExtraRev from "./revision/Extra";
@@ -82,6 +83,8 @@ function Main(props) {
     return <Viatic host={props.host}/>;
   } else if (props.type === "extra") {
     return <Extra host={props.host}/>;
+  } else if (props.type === "historial") {
+    return <History host={props.host}/>;
   } else if (props.type === "home") {
     return <h1>Home</h1>;
   } else if (props.type === "combustibleRev") {

@@ -8,6 +8,7 @@ import FastfoodIcon from "@material-ui/icons/Fastfood";
 import AddIcon from "@material-ui/icons/Add";
 import HomeIcon from "@material-ui/icons/Home";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import HistoryIcon from '@material-ui/icons/History';
 
 function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
@@ -44,6 +45,12 @@ export const listForm = (
         <AddIcon />
       </ListItemIcon>
       <ListItemText primary="Extra" />
+    </ListItemLink>
+    <ListItemLink button href={"/dashboard/historial"}>
+      <ListItemIcon>
+        <HistoryIcon />
+      </ListItemIcon>
+      <ListItemText primary="Historial" />
     </ListItemLink>
   </div>
 );

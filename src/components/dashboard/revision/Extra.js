@@ -105,7 +105,7 @@ class Extra extends Component {
                     {extra.extras.map((ex) => (
                       <StyledTableRow key={ex._id}>
                         <StyledTableCell component="th" scope="row">
-                          {ex.date}
+                          {ex.date.substring(0, 10)}
                         </StyledTableCell>
                         <StyledTableCell>
                           {ex.comment}

@@ -110,7 +110,7 @@ class Fuel extends Component {
                     {fuel.fuels.map((fu) => (
                       <StyledTableRow key={fu._id}>
                         <StyledTableCell component="th" scope="row">
-                          {fu.date}
+                          {fu.date.substring(0, 10)}
                         </StyledTableCell>
                         <StyledTableCell>
                           {fu.liters}
