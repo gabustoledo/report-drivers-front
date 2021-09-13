@@ -27,7 +27,7 @@ export default function Title(props) {
     const token = localStorage.getItem("token");
     axios
       .post(
-        "http://localhost:8080/api/auth/register",
+        "http://128.199.5.111:8080/api/auth/register",
         {
           name: name,
           password: password,

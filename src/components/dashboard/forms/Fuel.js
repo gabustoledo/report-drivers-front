@@ -29,7 +29,7 @@ export default function Fuel() {
     const token = localStorage.getItem("token");
     axios
       .post(
-        "http://localhost:8080/api/fuel",
+        "http://128.199.5.111:8080/api/fuel",
         {
           amount: amount,
           date: date,

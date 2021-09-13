@@ -32,6 +32,7 @@ import TollRev from "./revision/Toll";
 import ExtraRev from "./revision/Extra";
 import ViaticRev from "./revision/Viatic";
 import CreateUser from "./CreateUser";
+import { ControlPointDuplicateOutlined } from "@material-ui/icons";
 
 function Copyright() {
   return (
@@ -193,17 +194,19 @@ export default function Dashboard() {
     const tokenAux = localStorage.getItem("token");
 
     axios
-      .get("http://localhost:8080/api/auth/me", {
+      .get("http://128.199.5.111:8080/api/auth/me", {
         headers: {
           authorization: tokenAux,
         },
       })
       .then((response) => {
         const status = response.status;
+        console.log(status)
         if (status === 200) setAuth(true);
         else {
           setAuth(false);
-          window.location.href = "/";
+          //window.location.href = "/";
+          console.log("el token no es valido")
         }
         if (response.data.role === "dev") {
           setRol(1);
@@ -212,9 +215,10 @@ export default function Dashboard() {
         }
       })
       .catch((err) => {
-        //console.log(err);
+        console.log('ocurrio un error')
+        console.log(err);
         setAuth(false);
-        window.location.href = "/";
+        window.location.href = "/dashboard/" + type;
       });
   }, []);
 

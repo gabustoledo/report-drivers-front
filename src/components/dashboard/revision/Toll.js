@@ -58,7 +58,7 @@ class Toll extends Component {
   getTolls = () => {
     const tokenAux = localStorage.getItem("token");
     axios
-      .get("http://localhost:8080/api/toll/mydrivers", {
+      .get("http://128.199.5.111:8080/api/toll/mydrivers", {
         headers: {
           authorization: tokenAux,
         },

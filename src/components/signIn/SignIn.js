@@ -62,7 +62,7 @@ export default function SignIn() {
     const tokenAux = localStorage.getItem('token');
 
     axios
-      .get("http://localhost:8080/api/auth/me", {
+      .get("http://128.199.5.111:8080/api/auth/me", {
         headers: {
           authorization: tokenAux,
         }
@@ -87,7 +87,7 @@ export default function SignIn() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8080/api/auth/login", {
+      .post("http://128.199.5.111:8080/api/auth/login", {
         name: name,
         password: pass,
       })

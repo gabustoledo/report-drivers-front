@@ -63,7 +63,7 @@ class Fuel extends Component {
   getFuels = () => {
     const tokenAux = localStorage.getItem("token");
     axios
-      .get("http://localhost:8080/api/fuel/mydrivers", {
+      .get("http://128.199.5.111:8080/api/fuel/mydrivers", {
         headers: {
           authorization: tokenAux,
         },
