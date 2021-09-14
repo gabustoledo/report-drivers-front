@@ -102,7 +102,7 @@ class Toll extends Component {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {toll.tolls.map((to) => (
+                    {toll.tolls.reverse().map((to) => (
                       <StyledTableRow key={to._id}>
                         <StyledTableCell component="th" scope="row">
                           {to.date.substring(0, 10)}

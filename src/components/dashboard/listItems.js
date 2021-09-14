@@ -9,6 +9,7 @@ import AddIcon from "@material-ui/icons/Add";
 import HomeIcon from "@material-ui/icons/Home";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import HistoryIcon from '@material-ui/icons/History';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
@@ -92,6 +93,12 @@ export const listRev = (
         <PersonAddIcon />
       </ListItemIcon>
       <ListItemText primary="Agregar nuevo usuario" />
+    </ListItemLink>
+    <ListItemLink button href={"/dashboard/dinero"}>
+      <ListItemIcon>
+        <AttachMoneyIcon />
+      </ListItemIcon>
+      <ListItemText primary="Caja chica" />
     </ListItemLink>
   </div>
 );

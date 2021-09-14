@@ -32,6 +32,7 @@ import FuelRev from "./revision/Fuel";
 import TollRev from "./revision/Toll";
 import ExtraRev from "./revision/Extra";
 import ViaticRev from "./revision/Viatic";
+import Money from "./revision/Money";
 import CreateUser from "./CreateUser";
 
 function Copyright() {
@@ -71,6 +72,11 @@ function BarLeft(props) {
         <List>{listRev}</List>
       </div>
     );
+  }else{
+    return (
+      <div>
+      </div>
+    );
   }
 }
 
@@ -97,6 +103,8 @@ function Main(props) {
     return <ExtraRev host={props.host}/>;
   } else if (props.type === "add") {
     return <CreateUser host={props.host}/>;
+  } else if (props.type === "dinero") {
+    return <Money host={props.host}/>;
   } else {
     return <h1>No encontrado</h1>;
   }
@@ -188,7 +196,8 @@ export default function Dashboard(props) {
   const [open, setOpen] = React.useState(false);
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [rol, setRol] = React.useState(3);
+  const [rol, setRol] = React.useState(4);
+  const [me, setMe] = React.useState(4);
 
   const { type } = useParams();
   const host = props.host;
@@ -215,7 +224,10 @@ export default function Dashboard(props) {
           setRol(1);
         } else if (response.data.role === "admin") {
           setRol(2);
+        } else if (response.data.role === "driver") {
+          setRol(3);
         }
+        setMe(response.data.name)
       })
       .catch((err) => {
         console.log('ocurrio un error')
@@ -289,6 +301,7 @@ export default function Dashboard(props) {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
+              <MenuItem>{me}</MenuItem>
               <MenuItem onClick={handleCloseSesion}>Cerrar Sesión</MenuItem>
             </Menu>
           </div>

@@ -9,11 +9,17 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, "0");
+var mm = String(today.getMonth() + 1).padStart(2, "0");
+var yyyy = today.getFullYear();
+today = yyyy + "-" + mm + "-" + dd;
+
 export default function Fuel(props) {
   const [liters, setLiters] = useState("");
   const [amount, setAmount] = useState("");
   const [mileage, setMileage] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(today);
   const [open, setOpen] = useState(false);
   const [alertText, setAlertText] = useState("");
 
@@ -103,7 +109,7 @@ export default function Fuel(props) {
             id="date"
             label="Fecha"
             type="date"
-            defaultValue=""
+            value={date}
             variant="outlined"
             margin="normal"
             fullWidth

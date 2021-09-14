@@ -12,6 +12,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 
 const columnsExtra = [
@@ -62,6 +63,17 @@ const columnsViatic = [
   },
 ];
 
+const columnsMoney = [
+  { id: "date", label: "Fecha", minWidth: 170 },
+  { id: "detail", label: "Detalle", minWidth: 170 },
+  {
+    id: "amount",
+    label: "Monto",
+    minWidth: 170,
+    align: "right",
+  },
+];
+
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -83,7 +95,14 @@ const StyledTableRow = withStyles((theme) => ({
 class History extends Component {
   constructor() {
     super();
-    this.state = { extras: [], fuels: [], tolls: [], viatics: [] };
+    this.state = {
+      extras: [],
+      fuels: [],
+      tolls: [],
+      viatics: [],
+      moneys: [],
+      total: 0,
+    };
 
     this.getAll = this.getAll.bind(this);
   }
@@ -97,6 +116,22 @@ class History extends Component {
     this.getFuels();
     this.getTolls();
     this.getViatics();
+    this.getMoney();
+  };
+
+  getMoney = () => {
+    const tokenAux = localStorage.getItem("token");
+    axios
+      .get(this.props.host + ":8080/api/money", {
+        headers: {
+          authorization: tokenAux,
+        },
+      })
+      .then((response) => {
+        this.setState({ moneys: response.data.moneys });
+        this.setState({ total: response.data.total });
+      })
+      .catch((err) => console.log(err));
   };
 
   getViatics = () => {
@@ -187,7 +222,7 @@ class History extends Component {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {this.state.fuels.map((fuel) => (
+                  {this.state.fuels.reverse().map((fuel) => (
                     <StyledTableRow key={fuel._id}>
                       <StyledTableCell component="th" scope="row">
                         {fuel.date.substring(0, 10)}
@@ -229,7 +264,7 @@ class History extends Component {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {this.state.tolls.map((to) => (
+                  {this.state.tolls.reverse().map((to) => (
                     <StyledTableRow key={to._id}>
                       <StyledTableCell component="th" scope="row">
                         {to.date.substring(0, 10)}
@@ -270,7 +305,7 @@ class History extends Component {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {this.state.viatics.map((vi) => (
+                  {this.state.viatics.reverse().map((vi) => (
                     <StyledTableRow key={vi._id}>
                       <StyledTableCell component="th" scope="row">
                         {vi.day.substring(0, 10)}
@@ -310,7 +345,7 @@ class History extends Component {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {this.state.extras.map((extra) => (
+                  {this.state.extras.reverse().map((extra) => (
                     <StyledTableRow key={extra._id}>
                       <StyledTableCell component="th" scope="row">
                         {extra.date.substring(0, 10)}
@@ -324,6 +359,84 @@ class History extends Component {
                 </TableBody>
               </Table>
             </TableContainer>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion defaultExpanded={false}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography>Caja chica</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <Paper>
+                  <Typography
+                    component="h2"
+                    variant="h6"
+                    gutterBottom
+                  >
+                    En caja chica: ${this.state.total}
+                  </Typography>
+                </Paper>
+              </Grid>
+              <Grid item xs={12}>
+                <TableContainer component={Paper}>
+                  <Table aria-label="customized table">
+                    <TableHead>
+                      <TableRow>
+                        {columnsMoney.map((column) => (
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            style={{ minWidth: column.minWidth }}
+                          >
+                            {column.label}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.state.moneys.reverse().map((money) => {
+                        if (money.type === "egreso") {
+                          return (
+                            <StyledTableRow
+                              key={money._id}
+                              style={{ backgroundColor: "#c96057" }}
+                            >
+                              <StyledTableCell component="th" scope="row">
+                                {money.date.substring(0, 10)}
+                              </StyledTableCell>
+                              <StyledTableCell>{money.detail}</StyledTableCell>
+                              <StyledTableCell align="right">
+                                {money.amount}
+                              </StyledTableCell>
+                            </StyledTableRow>
+                          );
+                        } else {
+                          return (
+                            <StyledTableRow
+                              key={money._id}
+                              style={{ backgroundColor: "#7fd15c" }}
+                            >
+                              <StyledTableCell component="th" scope="row">
+                                {money.date.substring(0, 10)}
+                              </StyledTableCell>
+                              <StyledTableCell>{money.detail}</StyledTableCell>
+                              <StyledTableCell align="right">
+                                {money.amount}
+                              </StyledTableCell>
+                            </StyledTableRow>
+                          );
+                        }
+                      })}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Grid>
+            </Grid>
           </AccordionDetails>
         </Accordion>
       </div>
