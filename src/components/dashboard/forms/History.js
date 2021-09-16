@@ -222,7 +222,7 @@ class History extends Component {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {this.state.fuels.reverse().map((fuel) => (
+                  {this.state.fuels.map((fuel) => (
                     <StyledTableRow key={fuel._id}>
                       <StyledTableCell component="th" scope="row">
                         {fuel.date.substring(0, 10)}
@@ -264,7 +264,7 @@ class History extends Component {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {this.state.tolls.reverse().map((to) => (
+                  {this.state.tolls.map((to) => (
                     <StyledTableRow key={to._id}>
                       <StyledTableCell component="th" scope="row">
                         {to.date.substring(0, 10)}
@@ -305,7 +305,7 @@ class History extends Component {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {this.state.viatics.reverse().map((vi) => (
+                  {this.state.viatics.map((vi) => (
                     <StyledTableRow key={vi._id}>
                       <StyledTableCell component="th" scope="row">
                         {vi.day.substring(0, 10)}
@@ -345,7 +345,7 @@ class History extends Component {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {this.state.extras.reverse().map((extra) => (
+                  {this.state.extras.map((extra) => (
                     <StyledTableRow key={extra._id}>
                       <StyledTableCell component="th" scope="row">
                         {extra.date.substring(0, 10)}
@@ -399,7 +399,7 @@ class History extends Component {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {this.state.moneys.reverse().map((money) => {
+                      {this.state.moneys.map((money) => {
                         if (money.type === "egreso") {
                           return (
                             <StyledTableRow

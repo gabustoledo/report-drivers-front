@@ -107,7 +107,7 @@ class Fuel extends Component {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {fuel.fuels.reverse().map((fu) => (
+                    {fuel.fuels.map((fu) => (
                       <StyledTableRow key={fu._id}>
                         <StyledTableCell component="th" scope="row">
                           {fu.date.substring(0, 10)}

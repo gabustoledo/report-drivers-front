@@ -186,7 +186,7 @@ class Money extends Component {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {money.moneys.reverse().map((money) => {
+                        {money.moneys.map((money) => {
                           if (money.type === "egreso") {
                             return (
                               <StyledTableRow

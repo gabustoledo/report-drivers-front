@@ -102,7 +102,7 @@ class Extra extends Component {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {extra.extras.reverse().map((ex) => (
+                    {extra.extras.map((ex) => (
                       <StyledTableRow key={ex._id}>
                         <StyledTableCell component="th" scope="row">
                           {ex.date.substring(0, 10)}

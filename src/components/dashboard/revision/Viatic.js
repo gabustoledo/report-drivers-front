@@ -101,7 +101,7 @@ class Viatic extends Component {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {viatic.viatics.reverse().map((vi) => (
+                    {viatic.viatics.map((vi) => (
                       <StyledTableRow key={vi._id}>
                         <StyledTableCell component="th" scope="row">
                           {vi.day.substring(0, 10)}
